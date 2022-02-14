@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ImageBackground, ScrollView,StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
+import { ImageBackground, Platform, PlatformColor, ScrollView,StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
 
 
 export default function HomeScreen({ navigation }) {
@@ -11,7 +11,7 @@ export default function HomeScreen({ navigation }) {
                 uri: 'https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
                 }} style={styles.image}>
                     <Text style={styles.homeText}>Fullbody</Text>
-                    <Text style={styles.greyText}>Strength Focused</Text>
+                    <Text style={styles.platformText}>Strength Focused</Text>
                 </ImageBackground>
             </View>
 
@@ -89,13 +89,15 @@ const styles = StyleSheet.create({
         paddingLeft: 150,
     },
 
-     greyText: {
-        color: 'grey',
-        fontSize: 15,
-        textAlign: 'center',
-        padding: 5,
-        paddingLeft: 150,
-        paddingBottom: 10,
+     platformText: {
+        ...Platform.select({
+            ios: {
+                color: PlatformColor('link') 
+            },
+            android: { 
+                color: PlatformColor('@android:color/holo_orange_light') 
+           },
+       })
     },
 
     workoutCard2: {
